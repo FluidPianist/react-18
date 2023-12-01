@@ -310,7 +310,7 @@ ul {
 .nav-container {
   display: flex;
   justify-content: space-between;
-  max-width: 400px;
+  min-width: 400px;
 }
 .nav-links {
   display: flex;

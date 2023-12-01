@@ -2059,6 +2059,7 @@ const UseRefBasics = () => {
   // set value ourselves or DOM node
 
   useEffect(() => {
+    //to focus on render
     // console.log(refContainer.current);
     refContainer.current.focus()
   })
@@ -2072,6 +2073,7 @@ const UseRefBasics = () => {
     console.log(name)
   }
 
+  //we use the below code if we want to run some functionality on re render only and not on the initial render
   useEffect(() => {
     if (!isMounted.current) {
       isMounted.current = true
@@ -2321,9 +2323,14 @@ const UserContainer = ({ user, logout }) => {
 export default UserContainer
 ```
 
+Two ways to pass props :
+
+1. Drilling the props down to all the child
+2. Setting Up a Global Context - checkout the context-api folder in 09-context-api/starter
+
 #### Setup Global Context
 
-final code in the repo under w-assets
+final code in the repo global-context
 
 - create new VITE project
 
@@ -2921,7 +2928,7 @@ React.memo(Component) - returns memoized component
 
 #### Function "Gotcha"
 
-- setup remove person function
+- setup remove person function in index.jsx
 
 ```js
 const removePerson = (id) => {
@@ -2931,6 +2938,8 @@ const removePerson = (id) => {
 ```
 
 - pass it down to List and Person
+- when we click count - the removePerson is being redefined along with the render, although no changes are made to removePerson.
+- when we pass removePerson to any memoized Component , the Component will also render
 
 #### UseCallback
 
@@ -3041,6 +3050,9 @@ import Starter from './tutorial/11-performance/starter/04-react-18'
 ```
 
 - useTransition is a React Hook that lets you update the state without blocking the UI.
+
+- if we dont use the useTransition to enclose our slow function
+  called newItems - we wont be able to type anything in the form
 
 ```js
 import { useState, useTransition } from 'react'
